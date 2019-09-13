@@ -1,0 +1,91 @@
+public class Sum extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        Sum this;
+
+        this := @this: Sum;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        return;
+    }
+
+    public int Sum(int, int)
+    {
+        Sum this;
+        int x, y, $i0;
+
+        this := @this: Sum;
+        x := @parameter0: int;
+        y := @parameter1: int;
+        $i0 = x + y;
+        return $i0;
+    }
+
+    public int Sum(int, int, int)
+    {
+        Sum this;
+        int x, y, z, $i0;
+
+        this := @this: Sum;
+        x := @parameter0: int;
+        y := @parameter1: int;
+        z := @parameter2: int;
+        $i0 = x + y;
+        $i0 = $i0 + z;
+        return $i0;
+    }
+
+    public double Sum(double, double)
+    {
+        Sum this;
+        double x, y, $d0;
+
+        this := @this: Sum;
+        x := @parameter0: double;
+        y := @parameter1: double;
+        $d0 = x + y;
+        return $d0;
+    }
+
+    public java.lang.String HelloWorld()
+    {
+        Sum this;
+        java.lang.String var;
+        java.io.PrintStream $r0;
+
+        this := @this: Sum;
+        var = "HelloWorld!";
+        $r0 = <java.lang.System: java.io.PrintStream out>;
+        virtualinvoke $r0.<java.io.PrintStream: void println(java.lang.String)>(var);
+        return "Be Negative";
+    }
+
+    public static void main(java.lang.String[])
+    {
+        java.lang.String[] args;
+        Sum $r0, s;
+        java.io.PrintStream $r1;
+        int $i0;
+        double $d0;
+        java.lang.String $r2;
+
+        args := @parameter0: java.lang.String[];
+        $r0 = new Sum;
+        specialinvoke $r0.<Sum: void <init>()>();
+        s = $r0;
+        $r1 = <java.lang.System: java.io.PrintStream out>;
+        $i0 = virtualinvoke s.<Sum: int Sum(int,int)>(10, 20);
+        virtualinvoke $r1.<java.io.PrintStream: void println(int)>($i0);
+        $r1 = <java.lang.System: java.io.PrintStream out>;
+        $i0 = virtualinvoke s.<Sum: int Sum(int,int,int)>(10, 20, 30);
+        virtualinvoke $r1.<java.io.PrintStream: void println(int)>($i0);
+        $r1 = <java.lang.System: java.io.PrintStream out>;
+        $d0 = virtualinvoke s.<Sum: double Sum(double,double)>(10.5, 20.5);
+        virtualinvoke $r1.<java.io.PrintStream: void println(double)>($d0);
+        $r1 = <java.lang.System: java.io.PrintStream out>;
+        $r2 = virtualinvoke s.<Sum: java.lang.String HelloWorld()>();
+        virtualinvoke $r1.<java.io.PrintStream: void println(java.lang.String)>($r2);
+        return;
+    }
+}

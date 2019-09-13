@@ -1,0 +1,102 @@
+public class test.Tester extends test.Parent
+{
+    int c;
+    static int status;
+    static test.Parent p;
+
+    static void <clinit>()
+    {
+        test.Parent $r0;
+
+        <test.Tester: int status> = 1;
+        $r0 = new test.Parent;
+        specialinvoke $r0.<test.Parent: void <init>()>();
+        <test.Tester: test.Parent p> = $r0;
+        return;
+    }
+
+    void <init>()
+    {
+        test.Tester this;
+
+        this := @this: test.Tester;
+        specialinvoke this.<test.Parent: void <init>()>();
+        this.<test.Tester: int c> = 0;
+        return;
+    }
+
+    static void print()
+    {
+        int i;
+        java.lang.StringBuilder $r0;
+        java.io.PrintStream $r1;
+        java.lang.String $r2;
+
+        i = 0;
+        goto label1;
+
+     label0:
+        $r1 = <java.lang.System: java.io.PrintStream out>;
+        $r0 = new java.lang.StringBuilder;
+        specialinvoke $r0.<java.lang.StringBuilder: void <init>(java.lang.String)>("Print ");
+        $r0 = virtualinvoke $r0.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(i);
+        $r2 = virtualinvoke $r0.<java.lang.StringBuilder: java.lang.String toString()>();
+        virtualinvoke $r1.<java.io.PrintStream: void println(java.lang.String)>($r2);
+        i = i + 1;
+
+     label1:
+        if i < 5 goto label0;
+
+        return;
+    }
+
+    static int show(int, float)
+    {
+        int a, c;
+        float f;
+        java.io.PrintStream $r0;
+        java.lang.StringBuilder $r1;
+        java.lang.String $r2;
+
+        a := @parameter0: int;
+        f := @parameter1: float;
+        if a <= 1 goto label0;
+
+        c = 2 * a;
+        goto label1;
+
+     label0:
+        c = a * -1;
+
+     label1:
+        $r0 = <java.lang.System: java.io.PrintStream out>;
+        $r1 = new java.lang.StringBuilder;
+        specialinvoke $r1.<java.lang.StringBuilder: void <init>(java.lang.String)>("f:");
+        $r1 = virtualinvoke $r1.<java.lang.StringBuilder: java.lang.StringBuilder append(float)>(f);
+        $r2 = virtualinvoke $r1.<java.lang.StringBuilder: java.lang.String toString()>();
+        virtualinvoke $r0.<java.io.PrintStream: void println(java.lang.String)>($r2);
+        return c;
+    }
+
+    public static void main(java.lang.String[])
+    {
+        java.lang.String[] args;
+        int b;
+        java.io.PrintStream $r0;
+        java.lang.StringBuilder $r1;
+        java.lang.String $r2;
+
+        args := @parameter0: java.lang.String[];
+        staticinvoke <test.Parent: void display(int,int)>(1, 11);
+        staticinvoke <test.Parent: void print(java.lang.String)>("child");
+        b = staticinvoke <test.Tester: int show(int,float)>(1, 1.0F);
+        staticinvoke <test.Tester: void print()>();
+        $r0 = <java.lang.System: java.io.PrintStream out>;
+        $r1 = new java.lang.StringBuilder;
+        specialinvoke $r1.<java.lang.StringBuilder: void <init>(java.lang.String)>("Returned");
+        $r1 = virtualinvoke $r1.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(b);
+        $r2 = virtualinvoke $r1.<java.lang.StringBuilder: java.lang.String toString()>();
+        virtualinvoke $r0.<java.io.PrintStream: void println(java.lang.String)>($r2);
+        return;
+    }
+}
