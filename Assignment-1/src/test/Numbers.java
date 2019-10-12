@@ -9,11 +9,7 @@ public class Numbers {
 	}
 	static void print()
 	{
-		while (x>0)
-		{
-			System.out.println(x);
-			x--;
-		}
+		x=1;
 		while (x>0)
 		{
 			System.out.println(x);

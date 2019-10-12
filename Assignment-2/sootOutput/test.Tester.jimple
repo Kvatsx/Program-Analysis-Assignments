@@ -1,0 +1,74 @@
+public class test.Tester extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        test.Tester this;
+
+        this := @this: test.Tester;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        return;
+    }
+
+    static int foo(int)
+    {
+        int z, a, b, z;
+        byte c, d;
+        java.io.PrintStream $r0;
+
+        z := @parameter0: int;
+        c = 11;
+        d = 5;
+        $r0 = <java.lang.System: java.io.PrintStream out>;
+        virtualinvoke $r0.<java.io.PrintStream: void println(int)>(z);
+        a = z * d;
+        b = z + c;
+        z = a + b;
+        return z;
+    }
+
+    public static void main(java.lang.String[])
+    {
+        java.lang.String[] args;
+        int val;
+        java.io.PrintStream $r0;
+
+        args := @parameter0: java.lang.String[];
+        val = staticinvoke <test.Tester: int foo(int)>(5);
+        $r0 = <java.lang.System: java.io.PrintStream out>;
+        virtualinvoke $r0.<java.io.PrintStream: void println(int)>(val);
+        return;
+    }
+
+    static int zoo()
+    {
+        java.util.Scanner $r0, sc;
+        java.io.InputStream $r1;
+        int a, b, z, $i0;
+        byte c;
+
+        $r0 = new java.util.Scanner;
+        $r1 = <java.lang.System: java.io.InputStream in>;
+        specialinvoke $r0.<java.util.Scanner: void <init>(java.io.InputStream)>($r1);
+        sc = $r0;
+        a = virtualinvoke sc.<java.util.Scanner: int nextInt()>();
+        b = virtualinvoke sc.<java.util.Scanner: int nextInt()>();
+        c = 10;
+        $i0 = a + b;
+        z = $i0 + c;
+        return z;
+    }
+
+    int bar1(int)
+    {
+        test.Tester this;
+        int x, product;
+        byte a;
+
+        this := @this: test.Tester;
+        x := @parameter0: int;
+        a = 10;
+        product = x * a;
+        return product;
+    }
+}

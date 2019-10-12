@@ -23,7 +23,7 @@ public class Driver {
 			System.err.println("Usage: java Driver [options] classname");
 			System.exit(0);
 		}
-		SootClass abc=Scene.v().loadClassAndSupport("test.Tester");
+		SootClass abc=Scene.v().loadClassAndSupport("test.Parent");
 		Options.v().setPhaseOption("jb", "use-original-names:true");
 //		Pack jtp=PackManager.v().getPack("jtp");
 //		jtp.add(new Transform("jtp.instrumenter", new ReachingDefinitionWrapper()));
@@ -66,7 +66,7 @@ public class Driver {
 			}
 			System.out.println();
 		}
-		ArrayList<List<Unit>> units = new ArrayList<List<Unit>>();
+//		ArrayList<List<Unit>> units = new ArrayList<List<Unit>>();
 		// Number of loops
 		System.out.println("Number of Loops: ");
 		for (SootMethod e : abc.getMethods()) {
@@ -75,7 +75,7 @@ public class Driver {
 				continue;
 			}
 			int count = 0;
-			units.add((List<Unit>) e.getSource().getBody(e, "jb").getUnits());
+//			units.add((List<Unit>) e.getSource().getBody(e, "jb").getUnits());
 			for (Unit o : e.getSource().getBody(e, "jb").getUnits()) {
 				boolean flag = o.toString().contains("goto") && o.toString().contains("branch");
 				if (flag) {
