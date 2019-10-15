@@ -48,3 +48,48 @@ public class Tester {
 		return product;
 	}
 }
+
+
+//public class Tester {
+//	static int foo(int z)
+//	{
+//		//{z}
+//		int x = 22;
+//		//{x, z}
+//		int y = 12;
+//		//{x, y, z}
+//		if(x<10)
+//		
+//		{
+//			while(x<20)
+//			{
+//			//{x, y, z}
+//			x = x + z;
+//			//{x, y}
+//			x++;
+//			//{x, y}
+//			}
+//		}
+//		else
+//		{
+//			while(x<10)
+//			{
+//			//{x, y}
+//			y++;
+//			//{x, y}
+//			}
+//		}
+//		//{x, y}
+//		System.out.println(x + " " + y);
+//		//{x}
+//		return x;
+//		//{ }
+//	}
+//	public static void main(String [] args) {
+//		//{val}
+//		int val = foo(5);
+//		//{val}
+//		System.out.println(val);
+//		//{ }
+//	}
+//}

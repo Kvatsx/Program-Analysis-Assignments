@@ -19,12 +19,40 @@ import soot.toolkits.scalar.BackwardFlowAnalysis;
 public class TaintVariableAnalysis extends BackwardFlowAnalysis<Unit, Set<String>> {
 	
 	Body b;
-	Set<String> inval, outval;
+	Set<String> inval, outval, UserInput;
+	boolean flag;
 	public TaintVariableAnalysis(UnitGraph g)
 	{
 		super(g);
+		UserInput = new HashSet<String>();
 		b = g.getBody();
+		flag = false;
 		doAnalysis();
+		Set<String> Result = new HashSet<String>();
+		for (String e : UserInput) {
+			for (String f : outval ) {
+				if (e.equals(f)) {
+					Result.add(f);
+				}
+			}
+		}
+		String Name = b.getMethod().getName();
+		if (!Name.equals("<init>")) {
+//			helperPrint(UserInput, "UserInput");
+//			helperPrint(outval, "outval");
+			System.out.println(Name + " " + Result.toString());
+			System.out.println();			
+		}
+	}
+	
+	void helperPrint(Set<String> s, String Name) {
+		System.out.print(Name + " {");
+		for (String e : s) {
+			if (e.charAt(0) != '$') {
+				System.out.print(e + ", ");
+			}
+		}
+		System.out.println("}");
 	}
 	
 	@Override
@@ -32,32 +60,19 @@ public class TaintVariableAnalysis extends BackwardFlowAnalysis<Unit, Set<String
 		inval = in;
 		outval = out;
 		Stmt u = (Stmt)unit;
-		System.out.println(u);
-//		System.out.println();
 		outval.addAll(inval);
-		
-		// Kill operation
-//		Iterator<ValueBox> defIt = u.getDefBoxes().iterator();
-//		while(defIt.hasNext())
-//		{
-//			ValueBox defBox = (ValueBox)defIt.next();
-//
-//			if (defBox.getValue() instanceof Local) {
-//				Iterator inIt = inval.iterator();
-//				while (inIt.hasNext()) {
-//					Stmt s = (Stmt)inIt.next();
-//					Iterator sIt = s.getDefBoxes().iterator();
-//					while (sIt.hasNext()) {
-//						ValueBox oldDefBox = (ValueBox)sIt.next();
-//						if (oldDefBox.getValue() instanceof Local && oldDefBox.getValue().equivTo(defBox.getValue()))
-//							outval.remove(s);
-//					}
-//				}
-//			}
-//		}
 		
 		//Gen operation
 		
+		// UserInput set containing parameter and scanner variables
+		if (u.toString().contains("@parameter")) {
+			UserInput.add(u.toString().split(" :=")[0]);
+		}
+		else if (u.toString().contains("java.util.Scanner")) {
+			UserInput.add(u.toString().split(" =")[0]);
+		}
+		
+		// Adding taint variable which affects Return Stmt
 		if (u instanceof JReturnStmt) {
 			for (ValueBox defBox: u.getUseBoxes()) {
 				if (defBox.getValue() instanceof Local) {
@@ -65,62 +80,58 @@ public class TaintVariableAnalysis extends BackwardFlowAnalysis<Unit, Set<String
 				}
 			}
 		}
-		
+
+		// Adding taint variable which affects Print Stmt
 		else if (u instanceof JInvokeStmt) {
-			for (Value v: (List<Value>) u.getInvokeExpr().getArgs()) {
-				outval.add(v.toString());
+			if (u.toString().contains("java.io.PrintStream")) {
+				for (Value v: (List<Value>) u.getInvokeExpr().getArgs()) {
+					if (v instanceof Local) {
+						outval.add(v.toString());	
+					}
+				}
 			}
 		}
 		
 		else if (u instanceof AssignStmt) {
-//			for (ValueBox defBox: u.getDefBoxes()) {
-//				if (defBox.getValue() instanceof Local && !inval.contains(defBox.getValue().toString())) {
-//					for (ValueBox useBox: u.getUseBoxes()) {
-//						System.out.println("JInvoke2: "+useBox.getValue().toString());
-//						System.out.println("Type: "+useBox.getValue().getType());
-//						
-//						if (useBox.getValue().getType().equals("java.util.Scanner")) {
-//							System.out.println("JInvoke: "+useBox.toString());
-//						}
-//						else {
-//							outval.add(u.get);
-//						}
-//					}
-//				}
-//			}
 			Value Left = ((AssignStmt) u).getLeftOp();
 			List Right = ((AssignStmt) u).getRightOp().getUseBoxes();
-			System.out.println(Left + "|" + ((AssignStmt) u).getRightOpBox().getValue().getUseBoxes().toString());
+//			System.out.println(Left + "|" + ((AssignStmt) u).getRightOpBox().getValue().getUseBoxes().toString());
 			if ( inval.contains(Left.toString())) {
-				System.out.println("Moving in");
+//				System.out.println("Moving in");
 				for (Object v : Right) {
-					System.out.println(v.getClass());
-					if (v instanceof JimpleLocalBox) {
-						System.out.println("Yo");
-					}
-					else {
+//					System.out.println(v.getClass());
+					if (v instanceof ImmediateBox) {
 						ImmediateBox temp = (ImmediateBox) v;
 						if (temp.getValue() instanceof Local) {
-							System.out.println("Yes");
+//							System.out.println("Yes");
 							outval.add(temp.getValue().toString());	
-							outval.add(Left.toString());
-						}
-						else {
-							System.out.println("No");
-							outval.remove(Left.toString());
 						}
 					}
 				}
 				if (Right.size() == 0) {
 					outval.remove(Left.toString());
 				}
+				else {
+					outval.add(Left.toString());
+				}
+			}
+			if (u.toString().contains("java.lang.StringBuilder")) {
+				for (Object v : Right) {
+					if (v instanceof ImmediateBox) {
+						ImmediateBox temp = (ImmediateBox) v;
+						if (temp.getValue() instanceof Local) {
+//							System.out.println("Yes");
+							outval.add(temp.getValue().toString());	
+						}
+					}
+				}
 			}
 		}
 		
-		System.out.println("In: " + inval);
-		System.out.println("Unit: " + u.toString());
-		System.out.println("Out :" + outval);
-		System.out.println();
+//		System.out.println("In: " + inval);
+//		System.out.println("Unit: " + u.toString());
+//		System.out.println("Out :" + outval);
+//		System.out.println();
 	}
 	
 	
