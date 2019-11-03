@@ -1,0 +1,101 @@
+public class CallGraphCreation.Sample_test extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        CallGraphCreation.Sample_test this;
+
+        this := @this: CallGraphCreation.Sample_test;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        return;
+    }
+
+    int foofoo(int)
+    {
+        CallGraphCreation.Sample_test this;
+        int x;
+
+        this := @this: CallGraphCreation.Sample_test;
+        x := @parameter0: int;
+        return 0;
+    }
+
+    int func(int)
+    {
+        CallGraphCreation.Sample_test this;
+        int x, t, s, $i0, x;
+        java.io.PrintStream $r0;
+        byte t;
+
+        this := @this: CallGraphCreation.Sample_test;
+        x := @parameter0: int;
+        t = x;
+        $r0 = <java.lang.System: java.io.PrintStream out>;
+        virtualinvoke $r0.<java.io.PrintStream: void println(java.lang.String)>("hi");
+        t = neg x;
+        $i0 = neg t;
+        s = $i0 + x;
+        t = 100;
+        if t <= 6 goto label0;
+
+        t = 0;
+        goto label1;
+
+     label0:
+        t = -100;
+
+     label1:
+        x = x + 1;
+        return t;
+    }
+
+    int foo(int)
+    {
+        CallGraphCreation.Sample_test this;
+        int p, a, l, g, $i0;
+
+        this := @this: CallGraphCreation.Sample_test;
+        p := @parameter0: int;
+        a = p;
+        a = virtualinvoke this.<CallGraphCreation.Sample_test: int func(int)>(2);
+        $i0 = virtualinvoke this.<CallGraphCreation.Sample_test: int func(int)>(-1);
+        l = a + $i0;
+        virtualinvoke this.<CallGraphCreation.Sample_test: int foofoo(int)>(4);
+        $i0 = virtualinvoke this.<CallGraphCreation.Sample_test: int func(int)>(l);
+        g = 1 + $i0;
+        return g;
+    }
+
+    public static void main(java.lang.String[])
+    {
+        java.lang.String[] args;
+        int play, x, y;
+        CallGraphCreation.Sample_test s, $r1;
+        boolean y;
+        java.lang.String $r0;
+        java.io.PrintStream $r2;
+
+        args := @parameter0: java.lang.String[];
+        $r0 = args[0];
+        play = staticinvoke <java.lang.Integer: int parseInt(java.lang.String)>($r0);
+        $r1 = new CallGraphCreation.Sample_test;
+        specialinvoke $r1.<CallGraphCreation.Sample_test: void <init>()>();
+        s = $r1;
+        x = 0;
+        y = 0;
+        if play <= 0 goto label0;
+
+        x = virtualinvoke s.<CallGraphCreation.Sample_test: int foo(int)>(play);
+        goto label1;
+
+     label0:
+        y = virtualinvoke s.<CallGraphCreation.Sample_test: int foo(int)>(4);
+        $r2 = <java.lang.System: java.io.PrintStream out>;
+        virtualinvoke $r2.<java.io.PrintStream: void println(int)>(y);
+
+     label1:
+        $r2 = <java.lang.System: java.io.PrintStream out>;
+        virtualinvoke $r2.<java.io.PrintStream: void println(int)>(x);
+        return;
+    }
+}

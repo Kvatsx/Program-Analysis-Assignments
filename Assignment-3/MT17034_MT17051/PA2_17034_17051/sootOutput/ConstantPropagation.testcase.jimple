@@ -1,0 +1,37 @@
+public class ConstantPropagation.testcase extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        ConstantPropagation.testcase this;
+
+        this := @this: ConstantPropagation.testcase;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        return;
+    }
+
+    public static int bar(int)
+    {
+        int x, b, c, a;
+        boolean a;
+        byte c, a;
+
+        x := @parameter0: int;
+        a = "+";
+        c = "+";
+        a = "-";
+        a = "+";
+        b = "+";
+        c = "+";
+        c = "+";
+        c = "+";
+        if a <= 10 goto label0;
+
+        b = "+";
+        b = "0";
+
+     label0:
+        a = "+";
+        return a;
+    }
+}
