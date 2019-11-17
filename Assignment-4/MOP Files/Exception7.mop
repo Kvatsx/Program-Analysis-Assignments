@@ -1,0 +1,23 @@
+import java.io.*;
+import java.util.*;
+
+Exception7(Transaction t) {
+	event start before(Transaction t) : 
+		call(* Transaction.start()) && target(t) {}
+
+	event modify before(Transaction t) : 
+		call(* Transaction.next()) && target(t) {}
+
+	event commit before(Transaction t) :
+		call(* Transaction.commit()) && target(t) {}
+
+	event rollback before(Transaction t) :
+		call(* Transaction.rollback()) && target(t) {}	
+
+	ere : (start (modify* rollback start)* modify rollback rollback )
+
+	@match {
+		System.err.println("Rollback followed by immediate rollback is also an error.");
+		__RESET;
+	}
+}

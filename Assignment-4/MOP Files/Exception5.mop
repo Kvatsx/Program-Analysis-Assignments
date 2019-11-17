@@ -1,0 +1,23 @@
+import java.io.*;
+import java.util.*;
+
+Exception5(Transaction t) {
+	event start before(Transaction t) : 
+		call(* Transaction.start()) && target(t) {}
+
+	event modify before(Transaction t) : 
+		call(* Transaction.next()) && target(t) {}
+
+	event commit before(Transaction t) :
+		call(* Transaction.commit()) && target(t) {}
+
+	event rollback before(Transaction t) :
+		call(* Transaction.rollback()) && target(t) {}	
+
+	ere : (modify |  (start (modify* rollback start)* modify* commit)* modify)
+
+	@match {
+		System.err.println("Modify can only happen between start and commit.");
+		__RESET;
+	}
+}

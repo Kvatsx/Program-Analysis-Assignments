@@ -1,0 +1,23 @@
+import java.io.*;
+import java.util.*;
+
+Exception4(Transaction t) {
+	event start before(Transaction t) : 
+		call(* Transaction.start()) && target(t) {}
+
+	event modify before(Transaction t) : 
+		call(* Transaction.next()) && target(t) {}
+
+	event commit before(Transaction t) :
+		call(* Transaction.commit()) && target(t) {}
+
+	event rollback before(Transaction t) :
+		call(* Transaction.rollback()) && target(t) {}	
+
+	ere : ((start (modify* rollback start)* modify* commit)* commit  | commit commit)
+
+	@match {
+		System.err.println("Commit followed by immediate commit is also an error.");
+		__RESET;
+	}
+}

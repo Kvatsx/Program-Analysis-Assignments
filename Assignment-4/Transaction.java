@@ -1,8 +1,7 @@
 
 public class Transaction {
 	public String Name;
-	public Transaction(String name)
-	{
+	public Transaction(String name) {
 		this.Name = name;
 	}
 	
@@ -28,10 +27,23 @@ public class Transaction {
 	
 	public static void main(String[] args) throws Exception {
 		Transaction a = new Transaction("A");
-		Transaction b = new Transaction("B");
+//		Transaction b = new Transaction("B");
+//		a.rollback();
 		a.start();
 		a.modify();
-		b.start();
 		a.commit();
+		a.start();
+		a.modify();
+//		a.commit();
+		a.rollback();
+		a.rollback();
+		a.modify();
+		a.commit();
+//		b.modify();
+//		b.modify();
+//		b.modify();
+//		b.rollback();
+//		b.rollback();
+//		b.commit();
 	}
 }

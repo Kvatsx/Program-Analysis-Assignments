@@ -1,0 +1,23 @@
+import java.io.*;
+import java.util.*;
+
+Exception3(Transaction t) {
+	event start before(Transaction t) : 
+		call(* Transaction.start()) && target(t) {}
+
+	event modify before(Transaction t) : 
+		call(* Transaction.next()) && target(t) {}
+
+	event commit before(Transaction t) :
+		call(* Transaction.commit()) && target(t) {}
+
+	event rollback before(Transaction t) :
+		call(* Transaction.rollback()) && target(t) {}	
+
+	ere : ((start (modify* rollback start)* modify* commit)* start start)
+
+	@match {
+		System.err.println("Start followed by immediate start is an error.");
+		__RESET;
+	}
+}

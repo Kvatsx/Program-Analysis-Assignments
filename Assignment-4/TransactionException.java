@@ -28,3 +28,16 @@ class Exception5 extends RuntimeException {
 		System.err.println(t+": "+"Modify can only happen between start and commit.");
 	}
 }
+
+// Bonus
+class RollBack2 extends RuntimeException {
+	public RollBack2(Transaction t) {
+		System.err.println(t+": "+"Every rollback should have a preceding start.");
+	}
+}
+
+class RollBack3 extends RuntimeException {
+	public RollBack3(Transaction t) {
+		System.err.println(t+": "+"Rollback followed by immediate rollback is also an error.");
+	}
+}
