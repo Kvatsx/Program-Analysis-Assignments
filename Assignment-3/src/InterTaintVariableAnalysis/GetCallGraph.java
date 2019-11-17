@@ -14,8 +14,8 @@ public class GetCallGraph
 
 	public Stack<SootMethod> obtaincallgraph(CallGraph cg, SootMethod src)
 	{
-		//System.out.println("src: "+src);
-		 Iterator<MethodOrMethodContext> targets = new Targets(cg.edgesOutOf(src));
+//		System.out.println("src: "+src.getName().toString());
+		Iterator<MethodOrMethodContext> targets = new Targets(cg.edgesOutOf(src));
 		 
 	 	if(!targets.hasNext())
 			 return callstack;
@@ -25,7 +25,7 @@ public class GetCallGraph
 	                   
 	           if(!tgt.isJavaLibraryMethod())
 	           {
-//	        	  System.out.println(src + " may call " + tgt.getName());
+	        	  System.out.println(src + " may call " + tgt.getName());
 	        	  if(callstack.contains(tgt))
 	        		   callstack.remove(tgt);
 

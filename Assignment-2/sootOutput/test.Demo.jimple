@@ -1,0 +1,139 @@
+public class test.Demo extends java.lang.Object
+{
+
+    public void <init>()
+    {
+        test.Demo this;
+
+        this := @this: test.Demo;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        return;
+    }
+
+    static int bar(int, int)
+    {
+        int y, t, z;
+        byte x;
+
+        y := @parameter0: int;
+        t := @parameter1: int;
+        x = 5;
+        z = x * y;
+        return z;
+    }
+
+    static int foo()
+    {
+        java.util.Scanner $r0, sc;
+        java.io.InputStream $r1;
+        int a, b, c, z, $i0;
+
+        $r0 = new java.util.Scanner;
+        $r1 = <java.lang.System: java.io.InputStream in>;
+        specialinvoke $r0.<java.util.Scanner: void <init>(java.io.InputStream)>($r1);
+        sc = $r0;
+        a = virtualinvoke sc.<java.util.Scanner: int nextInt()>();
+        b = virtualinvoke sc.<java.util.Scanner: int nextInt()>();
+        if a <= b goto label0;
+
+        a = 10;
+        goto label1;
+
+     label0:
+        b = 11;
+
+     label1:
+        c = 10;
+        goto label3;
+
+     label2:
+        a = a + -1;
+        c = c + 10;
+
+     label3:
+        if a > 5 goto label2;
+
+        $i0 = a + b;
+        z = $i0 + c;
+        if a <= b goto label4;
+
+        return z;
+
+     label4:
+        return c;
+    }
+
+    static int sum()
+    {
+        int t, b, z;
+        java.io.InputStream $r0;
+        java.util.Scanner sc, $r1;
+        byte a;
+
+        t = 5;
+        $r1 = new java.util.Scanner;
+        $r0 = <java.lang.System: java.io.InputStream in>;
+        specialinvoke $r1.<java.util.Scanner: void <init>(java.io.InputStream)>($r0);
+        sc = $r1;
+        a = 10;
+        b = virtualinvoke sc.<java.util.Scanner: int nextInt()>();
+        if a <= b goto label0;
+
+        t = t + 1;
+
+     label0:
+        z = a + t;
+        return z;
+    }
+
+    static int sum2(int, int)
+    {
+        int a, b, c;
+
+        a := @parameter0: int;
+        b := @parameter1: int;
+        c = a + b;
+        return c;
+    }
+
+    public static void main(java.lang.String[])
+    {
+        java.lang.String[] args;
+        byte t, y;
+        java.io.InputStream $r0;
+        java.util.Scanner sc, $r1;
+        int inp, a, b, c, d, e;
+        java.io.PrintStream $r2;
+        java.lang.StringBuilder $r3;
+        java.lang.String $r4, $r5;
+
+        args := @parameter0: java.lang.String[];
+        t = 5;
+        y = 10;
+        $r1 = new java.util.Scanner;
+        $r0 = <java.lang.System: java.io.InputStream in>;
+        specialinvoke $r1.<java.util.Scanner: void <init>(java.io.InputStream)>($r0);
+        sc = $r1;
+        inp = virtualinvoke sc.<java.util.Scanner: int nextInt()>();
+        a = staticinvoke <test.Demo: int foo()>();
+        b = staticinvoke <test.Demo: int bar(int,int)>(inp, t);
+        c = staticinvoke <test.Demo: int sum()>();
+        d = staticinvoke <test.Demo: int sum2(int,int)>(t, y);
+        e = staticinvoke <test.Demo: int bar(int,int)>(t, inp);
+        $r2 = <java.lang.System: java.io.PrintStream out>;
+        $r3 = new java.lang.StringBuilder;
+        $r4 = staticinvoke <java.lang.String: java.lang.String valueOf(int)>(a);
+        specialinvoke $r3.<java.lang.StringBuilder: void <init>(java.lang.String)>($r4);
+        $r3 = virtualinvoke $r3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+        $r3 = virtualinvoke $r3.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(b);
+        $r3 = virtualinvoke $r3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+        $r3 = virtualinvoke $r3.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(c);
+        $r3 = virtualinvoke $r3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+        $r3 = virtualinvoke $r3.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(d);
+        $r3 = virtualinvoke $r3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" ");
+        $r3 = virtualinvoke $r3.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(e);
+        $r5 = virtualinvoke $r3.<java.lang.StringBuilder: java.lang.String toString()>();
+        virtualinvoke $r2.<java.io.PrintStream: void println(java.lang.String)>($r5);
+        return;
+    }
+}

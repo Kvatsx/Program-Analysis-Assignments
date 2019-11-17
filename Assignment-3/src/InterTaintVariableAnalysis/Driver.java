@@ -1,5 +1,6 @@
 package InterTaintVariableAnalysis;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,11 +26,13 @@ import soot.jimple.toolkits.callgraph.CHATransformer;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.toolkits.graph.ExceptionalUnitGraph;
 
-public class Driver {
+public class Driver{
 	static HashMap<String, Info> Summary = new HashMap<String, Info>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		System.out.println("Demo");
 		if(args.length==0)
 		{
 			System.err.println("Usage: java Driver [options] classname");
@@ -51,13 +54,15 @@ public class Driver {
 	 			CallGraph cg = Scene.v().getCallGraph();   //call graph generated
 	 			Stack<SootMethod> stack = new GetCallGraph().obtaincallgraph(cg,src);	 //call graph sorted topologically
 	 			Iterator<SootMethod> value = stack.iterator(); 
+	 			System.out.println("Stack Size: "+stack.size());
 	 			while (value.hasNext()) { 
-	 				System.out.println(value.next().getName().toString()); 
+	 				System.out.println("Node: " + value.next().getName().toString()); 
 	 			} 
 	 			buildsummary(stack);
 	 		}
 		}));
-		System.out.println("ClassName: " + classname);
+		System.out.println("Hello");
+		System.out.println("Class Name: " + classname);
 		PackManager.v().getPack("jtp").add(new Transform("jtp.instrumenter", new BodyTransformer()
  	    {
 			protected void internalTransform(Body body, String phase, Map options)
